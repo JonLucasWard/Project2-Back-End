@@ -1,0 +1,62 @@
+package com.revature.carrental.dao;
+
+import com.revature.carrental.model.Users;
+
+import java.util.List;
+
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.stereotype.Service;
+
+import com.revature.carrental.repository.UsersRepository;
+
+@Service
+public class UsersDAO implements UserDetailsService {
+	
+	@Autowired
+	UsersRepository usersRepository;
+	
+	/*
+	 * SAVE USERS
+	 */
+	
+	public Users save(Users users) {
+		return usersRepository.save(users);
+		
+	}
+	
+	
+	/*
+	 * SEARCH ALL USERS
+	 */
+	public List<Users> findAll(){
+		return usersRepository.findAll();
+	}
+	
+	
+	/*
+	 * GET A USER BY ID
+	 */
+	
+	public Users findOne(Long userid) {
+		return usersRepository.findOne(userid);
+	}
+	
+	/*
+	 * DELETE USERS
+	 */
+	
+	public void delete(Users users) {
+		usersRepository.delete(users);
+	}
+
+
+	@Override
+	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+		usersRepository.findOneByUsername(username);
+		return usersRepository.findOneByUsername(username);
+	}
+}

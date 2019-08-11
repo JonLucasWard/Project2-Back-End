@@ -1,0 +1,66 @@
+package com.revature.carrental.dao;
+
+import com.revature.carrental.model.Users;
+
+import java.util.List;
+
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Service;
+
+import com.revature.carrental.repository.UsersRepository;
+
+@Service
+public class UsersDAO {
+	
+	@Autowired
+	UsersRepository usersRepository;
+	
+	@Autowired
+	private PasswordEncoder bcryptEncoder;
+	
+	/*
+	 * SAVE USERS
+	 */
+	
+	public Users save(Users users) {
+		Users newUser = new Users();
+		newUser.setUsername(users.getUsername());
+		newUser.setPassword(bcryptEncoder.encode(users.getPassword()));
+		newUser.setFirstname(users.getFirstname());
+		newUser.setLastname(users.getLastname());
+		newUser.setEmail(users.getEmail());
+		newUser.setPhonenumber(users.getPhonenumber());
+		newUser.setDriverlicense(users.getDriverlicense());
+		newUser.setRole(users.getRole());
+		
+		return usersRepository.save(newUser);
+		
+	}
+	
+	
+	/*
+	 * SEARCH ALL USERS
+	 */
+	public List<Users> findAll(){
+		return usersRepository.findAll();
+	}
+	
+	
+	/*
+	 * GET A USER BY ID
+	 */
+	
+	public Users findOne(Long userid) {
+		return usersRepository.findOne(userid);
+	}
+	
+	/*
+	 * DELETE USERS
+	 */
+	
+	public void delete(Users users) {
+		usersRepository.delete(users);
+	}
+}

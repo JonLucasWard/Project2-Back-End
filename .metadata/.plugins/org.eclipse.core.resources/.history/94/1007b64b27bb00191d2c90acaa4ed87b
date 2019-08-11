@@ -1,0 +1,5 @@
+package com.revature.carrental.config;
+
+public class JwtRequestFilter {
+
+}
