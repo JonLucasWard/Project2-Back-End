@@ -21,7 +21,7 @@ import com.revature.carrental.model.Users;
 
 
 @RestController
-@RequestMapping("/teame")
+@RequestMapping("/teame/users")
 public class UsersController {
 
 	@Autowired
