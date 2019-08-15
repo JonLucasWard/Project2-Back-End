@@ -45,7 +45,6 @@ public class UsersController {
 		return usersDAO.save(users);
 	}
 	
-	
 	/*
 	 * GET ALL USERS
 	 */
