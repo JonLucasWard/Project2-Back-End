@@ -49,7 +49,7 @@ public class RentalsController {
 	 * GET ALL rentals
 	 */
 	
-	@GetMapping("/rentals")
+	@GetMapping("/all")
 	public List<Rentals> getAllrentals(){
 		
 		return rentalsDAO.findAll();
@@ -59,7 +59,7 @@ public class RentalsController {
 	 * GET USER BY ID
 	 */
 	
-	@GetMapping("/rentals/{id}")
+	@GetMapping("/{id}")
 	public ResponseEntity<Rentals> getrentalsById(@PathVariable(value="id") Long rentalid){
 		
 		Rentals rentals = rentalsDAO.findOne(rentalid);
@@ -77,7 +77,7 @@ public class RentalsController {
 	 * UPDATE rentals
 	 */
 	
-	@PutMapping("/rentals/{id}")
+	@PutMapping("/{id}")
 	public ResponseEntity<Rentals> updaterentals(@PathVariable(value="id") Long userid, @Valid @RequestBody Rentals rentalsDetails){
 		
 		Rentals rentals = rentalsDAO.findOne(userid);
@@ -103,7 +103,7 @@ public class RentalsController {
 	 * DELETE rentals
 	 */
 	
-	@DeleteMapping("/rentals/{id}")
+	@DeleteMapping("/{id}")
 	public ResponseEntity<Rentals> deleterentals(@PathVariable(value="id") Long rentalid){
 		
 		Rentals rentals = rentalsDAO.findOne(rentalid);

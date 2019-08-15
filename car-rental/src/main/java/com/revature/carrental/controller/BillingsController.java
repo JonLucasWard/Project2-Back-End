@@ -48,7 +48,7 @@ public class BillingsController {
 	 * GET ALL billings
 	 */
 	
-	@GetMapping("/billings")
+	@GetMapping("/all")
 	public List<Billings> getAllbillings(){
 		
 		return billingsDAO.findAll();
@@ -58,7 +58,7 @@ public class BillingsController {
 	 * GET BILL BY ID
 	 */
 	
-	@GetMapping("/billings/{id}")
+	@GetMapping("/{id}")
 	public ResponseEntity<Billings> getbillingsById(@PathVariable(value="id") Long billingid){
 		
 		Billings billings = billingsDAO.findOne(billingid);
@@ -75,7 +75,7 @@ public class BillingsController {
 	 * UPDATE billings
 	 */
 	
-	@PutMapping("/billings/{id}")
+	@PutMapping("/{id}")
 	public ResponseEntity<Billings> updatebillings(@PathVariable(value="id") Long billingid, @Valid @RequestBody Billings billingsDetails){
 		
 		Billings billings = billingsDAO.findOne(billingid);
@@ -101,7 +101,7 @@ public class BillingsController {
 	 * DELETE billings
 	 */
 	
-	@DeleteMapping("/billings/{id}")
+	@DeleteMapping("/{id}")
 	public ResponseEntity<Billings> deletebillings(@PathVariable(value="id") Long userid){
 		
 		Billings billings = billingsDAO.findOne(userid);

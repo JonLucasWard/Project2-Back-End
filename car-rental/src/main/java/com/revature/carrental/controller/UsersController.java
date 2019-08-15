@@ -21,7 +21,7 @@ import com.revature.carrental.model.Users;
 
 
 @RestController
-@RequestMapping("/teame/users")
+@RequestMapping("/teame")
 public class UsersController {
 
 	@Autowired
@@ -44,7 +44,6 @@ public class UsersController {
 		
 		return usersDAO.save(users);
 	}
-	
 	
 	/*
 	 * GET ALL USERS

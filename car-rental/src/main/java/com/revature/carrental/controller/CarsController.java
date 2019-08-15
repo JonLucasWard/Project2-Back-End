@@ -52,7 +52,7 @@ public class CarsController {
 	 * GET ALL CARS
 	 */
 	
-	@GetMapping("/cars")
+	@GetMapping("/all")
 	public List<Car> getAllcars(){
 		
 		return carsDAO.findAll();
@@ -62,7 +62,7 @@ public class CarsController {
 	 * GET CAR BY ID
 	 */
 	
-	@GetMapping("/cars/{id}")
+	@GetMapping("/{id}")
 	public ResponseEntity<Car> getcarsById(@PathVariable(value="id") Long carid){
 		
 		Car cars = carsDAO.findOne(carid);
@@ -80,7 +80,7 @@ public class CarsController {
 	 * UPDATE CARS
 	 */
 	
-	@PutMapping("/cars/{id}")
+	@PutMapping("/{id}")
 	public ResponseEntity<Car> updatecars(@PathVariable(value="id") Long userid, @Valid @RequestBody Car carsDetails){
 		
 		Car cars = carsDAO.findOne(userid);
@@ -110,7 +110,7 @@ public class CarsController {
 	 * DELETE cars
 	 */
 	
-	@DeleteMapping("/cars/{id}")
+	@DeleteMapping("/{id}")
 	public ResponseEntity<Car> deletecars(@PathVariable(value="id") Long carid){
 		
 		Car cars = carsDAO.findOne(carid);
