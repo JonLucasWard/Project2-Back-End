@@ -9,6 +9,8 @@ import javax.persistence.EntityListeners;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
@@ -47,14 +49,16 @@ public class Car {
 	@Column(nullable = false)
 	private Boolean ac;
 	
-	@Column(nullable = false)
-	private Integer statusid;
+	@ManyToOne
+	@JoinColumn(nullable = false)
+	private Status statusid;
 	
 	@Column(nullable = false)
 	private Long rate;
 	
-	@Column(nullable = false)
-	private Integer typeid;
+	@ManyToOne
+	@JoinColumn(nullable = false)
+	private Type typeid;
 	
 	public Long getCarid() {
 		return carid;
@@ -128,11 +132,11 @@ public class Car {
 		this.ac = ac;
 	}
 
-	public Integer getStatusid() {
+	public Status getStatusid() {
 		return statusid;
 	}
 
-	public void setStatusid(Integer statusid) {
+	public void setStatusid(Status statusid) {
 		this.statusid = statusid;
 	}
 
@@ -144,11 +148,11 @@ public class Car {
 		this.rate = rate;
 	}
 
-	public Integer getTypeid() {
+	public Type getTypeid() {
 		return typeid;
 	}
 
-	public void setTypeid(Integer typeid) {
+	public void setTypeid(Type typeid) {
 		this.typeid = typeid;
 	}
 

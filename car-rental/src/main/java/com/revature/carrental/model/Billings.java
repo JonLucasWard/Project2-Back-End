@@ -6,6 +6,8 @@ import javax.persistence.EntityListeners;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
@@ -28,19 +30,19 @@ public class Billings {
 		this.billingid = billingid;
 	}
 
-	public Long getUserid() {
+	public Users getUserid() {
 		return userid;
 	}
 
-	public void setUserid(Long userid) {
+	public void setUserid(Users userid) {
 		this.userid = userid;
 	}
 
-	public Long getTransactionid() {
+	public Rentals getTransactionid() {
 		return transactionid;
 	}
 
-	public void setTransactionid(Long transactionid) {
+	public void setTransactionid(Rentals transactionid) {
 		this.transactionid = transactionid;
 	}
 
@@ -84,11 +86,13 @@ public class Billings {
 		this.amount = amount;
 	}
 
-	@Column(nullable = false)
-	private Long userid;
+	@ManyToOne
+	@JoinColumn(nullable = false)
+	private Users userid;
 	
-	@Column(nullable = false)
-	private Long transactionid;
+	@ManyToOne
+	@JoinColumn(nullable = false)
+	private Rentals transactionid;
 	
 	@Column(nullable = false)
 	private String nameoncard;

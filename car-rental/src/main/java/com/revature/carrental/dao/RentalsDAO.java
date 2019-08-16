@@ -1,5 +1,6 @@
 package com.revature.carrental.dao;
 
+import com.revature.carrental.model.Car;
 import com.revature.carrental.model.Rentals;
 
 import java.util.ArrayList;
@@ -112,8 +113,8 @@ public class RentalsDAO  {
 	 * GET ALL RENTALS BY CARID
 	 */
 	
-	public ArrayList<Rentals> findAll(Long carid) {
-		return rentalsRepository.findAllBycarid(carid);
+	public ArrayList<Rentals> findAll(Car car) {
+		return rentalsRepository.findAllBycarid(car);
 	}
 	
 	/*

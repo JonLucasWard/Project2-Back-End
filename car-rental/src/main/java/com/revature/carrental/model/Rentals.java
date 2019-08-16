@@ -8,6 +8,8 @@ import javax.persistence.EntityListeners;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
@@ -22,11 +24,13 @@ public class Rentals {
 	@Column(nullable = false)
 	private Long transactionid;
 	
-	@Column(nullable = false)
-	private Long userid;
+	@ManyToOne
+	@JoinColumn(nullable = false)
+	private Users userid;
 	
-	@Column(nullable = false)
-	private Long carid;
+	@ManyToOne
+	@JoinColumn(nullable = false)
+	private Car carid;
 	
 	@Column(nullable = false)
 	private Date daterented;
@@ -50,22 +54,22 @@ public class Rentals {
 	}
 
 
-	public Long getUserid() {
+	public Users getUserid() {
 		return userid;
 	}
 
 
-	public void setUserid(Long userid) {
+	public void setUserid(Users userid) {
 		this.userid = userid;
 	}
 
 
-	public Long getCarid() {
+	public Car getCarid() {
 		return carid;
 	}
 
 
-	public void setCarid(Long carid) {
+	public void setCarid(Car carid) {
 		this.carid = carid;
 	}
 

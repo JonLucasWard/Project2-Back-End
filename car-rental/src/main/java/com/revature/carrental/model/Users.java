@@ -8,6 +8,8 @@ import javax.persistence.EntityListeners;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
@@ -45,8 +47,9 @@ public class Users {
 	@Column(nullable = false)
 	private String driverlicense;
 	
-	@Column(nullable = false)
-	private Long role;
+	@ManyToOne
+	@JoinColumn(nullable = false)
+	private Roles roleid;
 
 	public Long getUserid() {
 		return userid;
@@ -112,19 +115,19 @@ public class Users {
 		this.driverlicense = driverlicense;
 	}
 
-	public Long getRole() {
-		return role;
+	public Roles getRole() {
+		return roleid;
 	}
 
-	public void setRole(Long role) {
-		this.role = role;
+	public void setRole(Roles role) {
+		this.roleid = role;
 	}
 
 	@Override
 	public String toString() {
 		return "Users [userid=" + userid + ", username=" + username + ", password=" + password + ", firstname="
 				+ firstname + ", lastname=" + lastname + ", email=" + email + ", phonenumber=" + phonenumber
-				+ ", driverlicense=" + driverlicense + ", role=" + role + "]";
+				+ ", driverlicense=" + driverlicense + ", role=" + roleid + "]";
 	}
 
 	

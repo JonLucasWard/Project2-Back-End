@@ -1,5 +1,6 @@
 package com.revature.carrental.repository;
 
+import com.revature.carrental.model.Car;
 import com.revature.carrental.model.Rentals;
 
 import java.util.ArrayList;
@@ -13,5 +14,5 @@ import org.springframework.stereotype.Repository;
 public interface RentalsRepository extends JpaRepository<Rentals, Long>, JpaSpecificationExecutor<Rentals>{
 
 	List<Rentals> findAll();
-	ArrayList<Rentals> findAllBycarid(Long carid);
+	ArrayList<Rentals> findAllBycarid(Car car);
 }
