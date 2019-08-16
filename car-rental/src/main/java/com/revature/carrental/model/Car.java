@@ -55,11 +55,11 @@ public class Car {
 	@Column(nullable = false)
 	private Integer typeid;
 	
-	public Long getUserid() {
+	public Long getCarid() {
 		return carid;
 	}
 
-	public void setUserid(Long carid) {
+	public void setCarid(Long carid) {
 		this.carid = carid;
 	}
 

@@ -30,7 +30,7 @@ public class BillingsController {
 	 * SAVE/CREATE A USER
 	 */
 	
-	@PostMapping("/register")
+	@PostMapping("/add")
 	public Billings createbillings(@Valid @RequestBody Billings billings) {
 		billings.setBillingid(billings.getBillingid());
 		billings.setUserid(billings.getUserid());
@@ -52,6 +52,15 @@ public class BillingsController {
 	public List<Billings> getAllbillings(){
 		
 		return billingsDAO.findAll();
+	}
+	
+	/*
+	 *  GET USER BY QUERY
+	 */
+	
+	@GetMapping("/users/query")
+	public List<Billings> getUsersByQuery(@RequestBody Billings bills){
+		return billingsDAO.findByCriteria(bills);
 	}
 	
 	/*

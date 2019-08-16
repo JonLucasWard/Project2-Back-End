@@ -30,7 +30,7 @@ public class CarsController {
 	 * SAVE/CREATE A Car
 	 */
 	
-	@PostMapping("/register")
+	@PostMapping("/add")
 	public Car createCars(@Valid @RequestBody Car cars) {
 		cars.setBrand(cars.getBrand());
 		cars.setModel(cars.getModel());
@@ -56,6 +56,15 @@ public class CarsController {
 	public List<Car> getAllcars(){
 		
 		return carsDAO.findAll();
+	}
+	
+	/*
+	 *  GET USER BY QUERY
+	 */
+	
+	@GetMapping("/users/query")
+	public List<Car> getUsersByQuery(@RequestBody Car cars){
+		return carsDAO.findByCriteria(cars);
 	}
 	
 	/*

@@ -61,16 +61,20 @@ public class UsersController {
 	
 	@GetMapping("/users/{id}")
 	public ResponseEntity<Users> getUsersById(@PathVariable(value="id") Long userid){
-		
 		Users users = usersDAO.findOne(userid);
-		
 		if(users == null) {
 			return ResponseEntity.notFound().build();
 		}
-		
 		return ResponseEntity.ok().body(users);
-		
-		
+	}
+	
+	/*
+	 *  GET USER BY QUERY
+	 */
+	
+	@GetMapping("/users/query")
+	public List<Users> getUsersByQuery(@RequestBody Users users){
+		return usersDAO.findByCriteria(users);
 	}
 	
 	/*
