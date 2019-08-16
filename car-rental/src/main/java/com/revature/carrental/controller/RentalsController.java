@@ -4,6 +4,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
@@ -40,16 +41,41 @@ public class RentalsController {
 	 */
 	
 	@PostMapping("/add")
-	public Rentals createrentals(@Valid @RequestBody Rentals rentals) {
+	public ResponseEntity<Rentals> createrentals(@Valid @RequestBody Rentals rentals) {
 		rentals.setTransactionid(rentals.getTransactionid());
 		rentals.setUserid(rentals.getUserid());
 		rentals.setCarid(rentals.getCarid());
+		// make model of all current rentals for that car
+		ArrayList<Rentals> y = rentalsDAO.findAll(rentals.getCarid());
+
+		// if start is before an end AND after the start of another rentals. return invalid
+		Date inQStart = rentals.getDaterented();
+		Date inQEnd = rentals.getExpectedreturn();
+		Date listEnd;
+		Date listStart;
+		for (int x = 0; x < y.size(); x++) {
+			listEnd = y.get(x).getExpectedreturn();
+			listStart = y.get(x).getDaterented();
+			// we now have start and end of current list, and start/end of dates of request
+			if( (inQStart.compareTo(listStart) < 0 && inQStart.compareTo(listEnd) <= 0) 
+					|| 
+				(inQStart.compareTo(listStart) > 0 && inQStart.compareTo(listEnd) >= 0)) {
+					// start is before other starts, or after || = other ends
+				} else { return ResponseEntity.badRequest().build(); }
+				if( (inQEnd.compareTo(listStart) <= 0 && inQEnd.compareTo(listEnd) < 0) 
+					|| 
+				(inQEnd.compareTo(listStart) >= 0 && inQEnd.compareTo(listEnd) > 0)) {
+				// end is before || = other starts, or after other ends
+			} else { return ResponseEntity.badRequest().build(); }}
+		//if it didn't end early, rental dates are valid and may be accepted
 		rentals.setDaterented(rentals.getDaterented());
 		rentals.setExpectedreturn(rentals.getExpectedreturn());
+		//no errors from the for loop, dates may be set
 		rentals.setDescription(rentals.getDescription());
 		rentals.setApproved(rentals.getApproved());
 		
-		return rentalsDAO.save(rentals);
+		rentalsDAO.save(rentals);
+		return ResponseEntity.ok().body(rentals);
 	}
 	
 	
@@ -130,20 +156,13 @@ public class RentalsController {
 		if(rentals == null) {
 			return ResponseEntity.notFound().build();
 		}
-		SimpleDateFormat formatter = new SimpleDateFormat("yyyy/MM/dd", Locale.ENGLISH);
 		Date end;
-		try {
-			end = formatter.parse(rentals.getExpectedreturn());
+			end = rentals.getExpectedreturn();
 			Date now = new java.util.Date();
 			if(now.compareTo(end) > 0) {
 				return ResponseEntity.badRequest().build();
 			}
 			rentalsDAO.delete(rentals);
 			return ResponseEntity.ok().build();
-		} catch (ParseException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			return ResponseEntity.badRequest().build();
-		}
 	}
 }

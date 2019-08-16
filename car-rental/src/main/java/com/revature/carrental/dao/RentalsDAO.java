@@ -97,6 +97,14 @@ public class RentalsDAO  {
 	}
 	
 	/*
+	 * GET ALL RENTALS BY CARID
+	 */
+	
+	public ArrayList<Rentals> findAll(Long carid) {
+		return rentalsRepository.findAllByCarId(carid);
+	}
+	
+	/*
 	 * DELETE rentals
 	 */
 	
