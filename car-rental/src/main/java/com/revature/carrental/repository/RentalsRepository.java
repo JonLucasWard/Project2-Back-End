@@ -13,5 +13,5 @@ import org.springframework.stereotype.Repository;
 public interface RentalsRepository extends JpaRepository<Rentals, Long>, JpaSpecificationExecutor<Rentals>{
 
 	List<Rentals> findAll();
-	ArrayList<Rentals> findAllByCarId(Long carid);
+	ArrayList<Rentals> findAllBycarid(Long carid);
 }

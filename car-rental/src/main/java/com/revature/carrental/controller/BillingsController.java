@@ -60,11 +60,11 @@ public class BillingsController {
 	 */
 	
 	@GetMapping("/users/query")
-	public List<Billings> getUsersByQuery(@RequestBody Billings bills, Integer x){
+	public List<Billings> getUsersByQuery(@RequestBody Billings bills, Integer x, Integer y){
 		if (x == null) {
 			x = 0;
 		}
-		return billingsDAO.findByCriteria(bills, new PageRequest(x, 10));
+		return billingsDAO.findByCriteria(bills, new PageRequest(x, 10), y);
 	}
 	
 	/*

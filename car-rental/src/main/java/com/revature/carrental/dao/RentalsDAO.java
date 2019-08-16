@@ -53,11 +53,11 @@ public class RentalsDAO  {
 	 * GET RENTALS LIST BY QUERY
 	 */
 	
-	public List<Rentals> findByCriteria(Rentals rentals, Pageable pageable){
+	public List<Rentals> findByCriteria(Rentals rentals, Pageable pageable, Integer y, Integer z){
 		Page page = rentalsRepository.findAll(new Specification<Rentals>() {
             @Override
         	public Predicate toPredicate(Root<Rentals> root, CriteriaQuery<?> query, CriteriaBuilder criteriaBuilder) {
-                List<Predicate> predicates = new ArrayList<>();
+            	List<Predicate> predicates = new ArrayList<>();
                 if(rentals.getUserid()!=null) {
                     predicates.add(criteriaBuilder.and(criteriaBuilder.equal(root.get("userid"), rentals.getUserid())));
                 }
@@ -71,13 +71,25 @@ public class RentalsDAO  {
                     predicates.add(criteriaBuilder.and(criteriaBuilder.equal(root.get("approved"), rentals.getApproved())));
                 }
                 if(rentals.getDaterented()!=null) {
-                    predicates.add(criteriaBuilder.and(criteriaBuilder.like(root.get("daterented"), "%"+rentals.getDaterented()+"%")));
+                	if(y == 1) {
+                		predicates.add(criteriaBuilder.and(criteriaBuilder.lessThanOrEqualTo(root.get("daterented"), rentals.getDaterented())));
+                	} else if (y == 2) {
+                		predicates.add(criteriaBuilder.and(criteriaBuilder.greaterThanOrEqualTo(root.get("daterented"), rentals.getDaterented())));
+                	} else {
+                		predicates.add(criteriaBuilder.and(criteriaBuilder.equal(root.get("daterented"), rentals.getDaterented())));
+                	}
                 }
                 if(rentals.getDescription()!=null) {
                     predicates.add(criteriaBuilder.and(criteriaBuilder.like(root.get("description"), "%"+rentals.getDescription()+"%")));
                 }
                 if(rentals.getExpectedreturn()!=null) {
-                    predicates.add(criteriaBuilder.and(criteriaBuilder.like(root.get("expectedreturn"), "%"+rentals.getExpectedreturn()+"%")));
+                	if(z == 1) {
+                		predicates.add(criteriaBuilder.and(criteriaBuilder.lessThanOrEqualTo(root.get("expectedreturn"), rentals.getExpectedreturn())));
+                	} else if (z == 2) {
+                		predicates.add(criteriaBuilder.and(criteriaBuilder.greaterThanOrEqualTo(root.get("expectedreturn"), rentals.getExpectedreturn())));
+                	} else {
+                		predicates.add(criteriaBuilder.and(criteriaBuilder.equal(root.get("expectedreturn"), rentals.getDaterented())));
+                	}
                 }
                 return criteriaBuilder.and(predicates.toArray(new Predicate[predicates.size()]));
             }
@@ -101,7 +113,7 @@ public class RentalsDAO  {
 	 */
 	
 	public ArrayList<Rentals> findAll(Long carid) {
-		return rentalsRepository.findAllByCarId(carid);
+		return rentalsRepository.findAllBycarid(carid);
 	}
 	
 	/*

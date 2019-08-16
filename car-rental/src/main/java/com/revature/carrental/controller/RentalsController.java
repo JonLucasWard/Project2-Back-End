@@ -1,20 +1,13 @@
 package com.revature.carrental.controller;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.Locale;
-
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -26,7 +19,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 import com.revature.carrental.dao.RentalsDAO;
 import com.revature.carrental.model.Rentals;
-import com.revature.carrental.model.Users;
 
 
 @RestController
@@ -94,11 +86,11 @@ public class RentalsController {
 	 */
 	
 	@GetMapping("/users/query")
-	public List<Rentals> getUsersByQuery(@RequestBody Rentals rentals, Integer x){
+	public List<Rentals> getUsersByQuery(@RequestBody Rentals rentals, Integer x, Integer y, Integer z){
 		if (x == null) {
 			x = 0;
 		}
-		return rentalsDAO.findByCriteria(rentals, new PageRequest(x,10));
+		return rentalsDAO.findByCriteria(rentals, new PageRequest(x,10), y, z);
 	}
 	
 	/*

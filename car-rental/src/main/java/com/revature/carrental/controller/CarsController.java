@@ -64,11 +64,11 @@ public class CarsController {
 	 */
 	
 	@GetMapping("/users/query")
-	public List<Car> getUsersByQuery(@RequestBody Car cars, Integer x){
+	public List<Car> getUsersByQuery(@RequestBody Car cars, Integer x, Integer y, Integer z){
 		if (x == null) {
 			x = 0;
 		}
-		return carsDAO.findByCriteria(cars, new PageRequest(x, 10));
+		return carsDAO.findByCriteria(cars, new PageRequest(x, 10), y, z);
 	}
 	
 	/*

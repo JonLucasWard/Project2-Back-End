@@ -49,7 +49,7 @@ public class CarsDAO  {
 	/*
 	 * SEARCH ALL CARS BY QUERY
 	 */
-	public List<Car> findByCriteria(Car cars, Pageable pageable){
+	public List<Car> findByCriteria(Car cars, Pageable pageable, Integer y, Integer z){
 		Page page = carsRepository.findAll(new Specification<Car>() {
             @Override
         	public Predicate toPredicate(Root<Car> root, CriteriaQuery<?> query, CriteriaBuilder criteriaBuilder) {
@@ -64,10 +64,16 @@ public class CarsDAO  {
                     predicates.add(criteriaBuilder.and(criteriaBuilder.like(root.get("color"), "%"+cars.getColor()+"%")));
                 }
                 if(cars.getMakeyear()!=null) {
-                    predicates.add(criteriaBuilder.and(criteriaBuilder.like(root.get("makeyear"), "%"+cars.getMakeyear()+"%")));
+                    if(z == 1) {
+                		predicates.add(criteriaBuilder.and(criteriaBuilder.lessThanOrEqualTo(root.get("makeyear"), cars.getMakeyear())));
+                	} else if (z == 2) {
+                		predicates.add(criteriaBuilder.and(criteriaBuilder.greaterThanOrEqualTo(root.get("makeyear"), cars.getMakeyear())));
+                	} else {
+                		predicates.add(criteriaBuilder.and(criteriaBuilder.equal(root.get("makeyear"), cars.getMakeyear())));
+                	}
                 }
                 if(cars.getModel()!=null) {
-                    predicates.add(criteriaBuilder.and(criteriaBuilder.like(root.get("model"), "%"+cars.getModel()+"%")));
+                    predicates.add(criteriaBuilder.and(criteriaBuilder.equal(root.get("model"), cars.getModel())));
                 }
                 if(cars.getTransmission()!=null) {
                     predicates.add(criteriaBuilder.and(criteriaBuilder.like(root.get("transmission"), "%"+cars.getTransmission()+"%")));
@@ -79,7 +85,13 @@ public class CarsDAO  {
                     predicates.add(criteriaBuilder.and(criteriaBuilder.equal(root.get("occupancy"), cars.getOccupancy())));
                 }
                 if(cars.getRate()!=null) {
-                    predicates.add(criteriaBuilder.and(criteriaBuilder.equal(root.get("rate"), cars.getRate())));
+                    if(y == 1) {
+                		predicates.add(criteriaBuilder.and(criteriaBuilder.lessThanOrEqualTo(root.get("rate"), cars.getRate())));
+                	} else if (y == 2) {
+                		predicates.add(criteriaBuilder.and(criteriaBuilder.greaterThanOrEqualTo(root.get("rate"), cars.getRate())));
+                	} else {
+                		predicates.add(criteriaBuilder.and(criteriaBuilder.equal(root.get("rate"), cars.getRate())));
+                	}
                 }
                 if(cars.getStatusid()!=null) {
                     predicates.add(criteriaBuilder.and(criteriaBuilder.equal(root.get("statusid"), cars.getStatusid())));

@@ -1,6 +1,5 @@
 package com.revature.carrental.model;
 
-import java.util.Collection;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -12,8 +11,6 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
 
 @Entity
 @Table(name="rentals")
