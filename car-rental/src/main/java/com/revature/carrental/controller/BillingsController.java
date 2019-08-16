@@ -55,6 +55,15 @@ public class BillingsController {
 	}
 	
 	/*
+	 *  GET USER BY QUERY
+	 */
+	
+	@GetMapping("/users/query")
+	public List<Billings> getUsersByQuery(@RequestBody Billings bills){
+		return billingsDAO.findByCriteria(bills);
+	}
+	
+	/*
 	 * GET BILL BY ID
 	 */
 	

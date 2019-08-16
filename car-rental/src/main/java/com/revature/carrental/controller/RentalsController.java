@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 import com.revature.carrental.dao.RentalsDAO;
 import com.revature.carrental.model.Rentals;
+import com.revature.carrental.model.Users;
 
 
 @RestController
@@ -46,7 +47,7 @@ public class RentalsController {
 	
 	
 	/*
-	 * GET ALL rentals
+	 * GET ALL RENTALS
 	 */
 	
 	@GetMapping("/all")
@@ -56,7 +57,16 @@ public class RentalsController {
 	}
 	
 	/*
-	 * GET USER BY ID
+	 *  GET RENTAL BY QUERY
+	 */
+	
+	@GetMapping("/users/query")
+	public List<Rentals> getUsersByQuery(@RequestBody Rentals rentals){
+		return rentalsDAO.findByCriteria(rentals);
+	}
+	
+	/*
+	 * GET RENTAL BY ID
 	 */
 	
 	@GetMapping("/{id}")
@@ -74,7 +84,7 @@ public class RentalsController {
 	}
 	
 	/*
-	 * UPDATE rentals
+	 * UPDATE RENTALS
 	 */
 	
 	@PutMapping("/{id}")
@@ -100,7 +110,7 @@ public class RentalsController {
 	}
 	
 	/*
-	 * DELETE rentals
+	 * DELETE RENTALS
 	 */
 	
 	@DeleteMapping("/{id}")

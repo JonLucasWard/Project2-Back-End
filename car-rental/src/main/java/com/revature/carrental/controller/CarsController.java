@@ -59,6 +59,15 @@ public class CarsController {
 	}
 	
 	/*
+	 *  GET USER BY QUERY
+	 */
+	
+	@GetMapping("/users/query")
+	public List<Car> getUsersByQuery(@RequestBody Car cars){
+		return carsDAO.findByCriteria(cars);
+	}
+	
+	/*
 	 * GET CAR BY ID
 	 */
 	
