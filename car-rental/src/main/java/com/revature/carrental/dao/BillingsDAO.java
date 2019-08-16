@@ -11,6 +11,8 @@ import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
@@ -48,8 +50,8 @@ public class BillingsDAO  {
 	/*
 	 * SEARCH ALL BILLINGS BY QUERY
 	 */
-	public List<Billings> findByCriteria(Billings billings){
-		return billingsRepository.findAll(new Specification<Billings>() {
+	public List<Billings> findByCriteria(Billings billings, Pageable pageable){
+		Page page = billingsRepository.findAll(new Specification<Billings>() {
             @Override
         	public Predicate toPredicate(Root<Billings> root, CriteriaQuery<?> query, CriteriaBuilder criteriaBuilder) {
                 List<Predicate> predicates = new ArrayList<>();
@@ -79,7 +81,11 @@ public class BillingsDAO  {
                 }
                 return criteriaBuilder.and(predicates.toArray(new Predicate[predicates.size()]));
             }
-        });
+        }, pageable);
+		
+		page.getTotalElements();
+		page.getTotalPages();
+		return page.getContent();
     }
 	
 	/*

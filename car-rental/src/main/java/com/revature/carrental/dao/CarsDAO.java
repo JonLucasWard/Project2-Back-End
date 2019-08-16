@@ -11,6 +11,8 @@ import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
@@ -47,8 +49,8 @@ public class CarsDAO  {
 	/*
 	 * SEARCH ALL CARS BY QUERY
 	 */
-	public List<Car> findByCriteria(Car cars){
-		return carsRepository.findAll(new Specification<Car>() {
+	public List<Car> findByCriteria(Car cars, Pageable pageable){
+		Page page = carsRepository.findAll(new Specification<Car>() {
             @Override
         	public Predicate toPredicate(Root<Car> root, CriteriaQuery<?> query, CriteriaBuilder criteriaBuilder) {
                 List<Predicate> predicates = new ArrayList<>();
@@ -87,8 +89,13 @@ public class CarsDAO  {
                 }
                 return criteriaBuilder.and(predicates.toArray(new Predicate[predicates.size()]));
             }
-        });
-    }
+        }, pageable);
+		
+		page.getTotalElements();
+		page.getTotalPages();
+		return page.getContent();
+		
+	}
 	
 	/*
 	 * GET A CAR BY ID
