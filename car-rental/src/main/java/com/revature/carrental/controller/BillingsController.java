@@ -5,6 +5,7 @@ import java.util.List;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -59,8 +60,11 @@ public class BillingsController {
 	 */
 	
 	@GetMapping("/users/query")
-	public List<Billings> getUsersByQuery(@RequestBody Billings bills){
-		return billingsDAO.findByCriteria(bills);
+	public List<Billings> getUsersByQuery(@RequestBody Billings bills, Integer x){
+		if (x == null) {
+			x = 0;
+		}
+		return billingsDAO.findByCriteria(bills, new PageRequest(x, 10));
 	}
 	
 	/*

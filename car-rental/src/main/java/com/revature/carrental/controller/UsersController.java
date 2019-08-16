@@ -5,6 +5,7 @@ import java.util.List;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -73,8 +74,11 @@ public class UsersController {
 	 */
 	
 	@GetMapping("/users/query")
-	public List<Users> getUsersByQuery(@RequestBody Users users){
-		return usersDAO.findByCriteria(users);
+	public List<Users> getUsersByQuery(@RequestBody Users users, Integer x){
+		if (x == null) {
+			x = 0;
+		}
+		return usersDAO.findByCriteria(users, new PageRequest(x,10));
 	}
 	
 	/*

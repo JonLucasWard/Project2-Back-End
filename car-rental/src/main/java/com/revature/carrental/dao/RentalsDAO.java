@@ -11,6 +11,8 @@ import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -51,8 +53,8 @@ public class RentalsDAO  {
 	 * GET RENTALS LIST BY QUERY
 	 */
 	
-	public List<Rentals> findByCriteria(Rentals rentals){
-		return rentalsRepository.findAll(new Specification<Rentals>() {
+	public List<Rentals> findByCriteria(Rentals rentals, Pageable pageable){
+		Page page = rentalsRepository.findAll(new Specification<Rentals>() {
             @Override
         	public Predicate toPredicate(Root<Rentals> root, CriteriaQuery<?> query, CriteriaBuilder criteriaBuilder) {
                 List<Predicate> predicates = new ArrayList<>();
@@ -79,9 +81,12 @@ public class RentalsDAO  {
                 }
                 return criteriaBuilder.and(predicates.toArray(new Predicate[predicates.size()]));
             }
-        });
-    }
-	
+        }, pageable);
+		
+		page.getTotalElements();
+		page.getTotalPages();
+		return page.getContent();
+	}
 	
 	/*
 	 * GET A RENTAL BY ID
