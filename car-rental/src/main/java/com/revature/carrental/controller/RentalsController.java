@@ -1,6 +1,12 @@
 package com.revature.carrental.controller;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 import javax.validation.Valid;
 
@@ -121,14 +127,23 @@ public class RentalsController {
 	public ResponseEntity<Rentals> deleterentals(@PathVariable(value="id") Long rentalid){
 		
 		Rentals rentals = rentalsDAO.findOne(rentalid);
-		
 		if(rentals == null) {
 			return ResponseEntity.notFound().build();
 		}
-		
-		rentalsDAO.delete(rentals);
-		
-		return ResponseEntity.ok().build();
-		
+		SimpleDateFormat formatter = new SimpleDateFormat("yyyy/MM/dd", Locale.ENGLISH);
+		Date end;
+		try {
+			end = formatter.parse(rentals.getExpectedreturn());
+			Date now = new java.util.Date();
+			if(now.compareTo(end) > 0) {
+				return ResponseEntity.badRequest().build();
+			}
+			rentalsDAO.delete(rentals);
+			return ResponseEntity.ok().build();
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return ResponseEntity.badRequest().build();
+		}
 	}
 }
