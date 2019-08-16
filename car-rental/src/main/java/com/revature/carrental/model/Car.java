@@ -1,6 +1,7 @@
 package com.revature.carrental.model;
 
 import java.util.Collection;
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -29,7 +30,7 @@ public class Car {
 	private String model;
 	
 	@Column(nullable = false)
-	private String makeyear;
+	private Date makeyear;
 	
 	@Column(nullable = false)
 	private Integer occupancy;
@@ -79,11 +80,11 @@ public class Car {
 		this.model = model;
 	}
 
-	public String getMakeyear() {
+	public Date getMakeyear() {
 		return makeyear;
 	}
 
-	public void setMakeyear(String makeyear) {
+	public void setMakeyear(Date makeyear) {
 		this.makeyear = makeyear;
 	}
 

@@ -1,6 +1,6 @@
 package com.revature.carrental.model;
 
-import java.util.Collection;
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -11,8 +11,6 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
 
 @Entity
 @Table(name="rentals")
@@ -31,10 +29,10 @@ public class Rentals {
 	private Long carid;
 	
 	@Column(nullable = false)
-	private String daterented;
+	private Date daterented;
 	
 	@Column(nullable = false)
-	private String expectedreturn;
+	private Date expectedreturn;
 	
 	@Column(nullable = false)
 	private String description;
@@ -72,22 +70,22 @@ public class Rentals {
 	}
 
 
-	public String getDaterented() {
+	public Date getDaterented() {
 		return daterented;
 	}
 
 
-	public void setDaterented(String daterented) {
+	public void setDaterented(Date daterented) {
 		this.daterented = daterented;
 	}
 
 
-	public String getExpectedreturn() {
+	public Date getExpectedreturn() {
 		return expectedreturn;
 	}
 
 
-	public void setExpectedreturn(String expectedreturn) {
+	public void setExpectedreturn(Date expectedreturn) {
 		this.expectedreturn = expectedreturn;
 	}
 

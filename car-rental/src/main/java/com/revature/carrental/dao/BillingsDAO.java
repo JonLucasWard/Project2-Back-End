@@ -50,7 +50,7 @@ public class BillingsDAO  {
 	/*
 	 * SEARCH ALL BILLINGS BY QUERY
 	 */
-	public List<Billings> findByCriteria(Billings billings, Pageable pageable){
+	public List<Billings> findByCriteria(Billings billings, Pageable pageable, Integer y){
 		Page page = billingsRepository.findAll(new Specification<Billings>() {
             @Override
         	public Predicate toPredicate(Root<Billings> root, CriteriaQuery<?> query, CriteriaBuilder criteriaBuilder) {
@@ -77,7 +77,14 @@ public class BillingsDAO  {
                     predicates.add(criteriaBuilder.and(criteriaBuilder.equal(root.get("userid"), billings.getUserid())));
                 }
                 if(billings.getAmount()!=null) {
-                    predicates.add(criteriaBuilder.and(criteriaBuilder.equal(root.get("amount"), billings.getAmount())));
+                	if(y == 1) {
+                		predicates.add(criteriaBuilder.and(criteriaBuilder.lessThanOrEqualTo(root.get("amount"), billings.getAmount())));
+                	} else if (y == 2) {
+                		predicates.add(criteriaBuilder.and(criteriaBuilder.greaterThanOrEqualTo(root.get("amount"), billings.getAmount())));
+                	} else {
+                		predicates.add(criteriaBuilder.and(criteriaBuilder.equal(root.get("amount"), billings.getAmount())));
+                	}
+                	
                 }
                 return criteriaBuilder.and(predicates.toArray(new Predicate[predicates.size()]));
             }

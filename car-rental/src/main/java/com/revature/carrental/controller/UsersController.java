@@ -6,6 +6,7 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -52,7 +53,6 @@ public class UsersController {
 	
 	@GetMapping("/users")
 	public List<Users> getAllUsers(){
-		
 		return usersDAO.findAll();
 	}
 	
