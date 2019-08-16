@@ -4,10 +4,11 @@ import com.revature.carrental.model.Rentals;
 
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface RentalsRepository extends JpaRepository<Rentals, Long >{
+public interface RentalsRepository extends JpaRepository<Rentals, Long>, JpaSpecificationExecutor<Rentals>{
 
 	
 }

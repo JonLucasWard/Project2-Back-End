@@ -30,7 +30,7 @@ public class BillingsController {
 	 * SAVE/CREATE A USER
 	 */
 	
-	@PostMapping("/register")
+	@PostMapping("/add")
 	public Billings createbillings(@Valid @RequestBody Billings billings) {
 		billings.setBillingid(billings.getBillingid());
 		billings.setUserid(billings.getUserid());

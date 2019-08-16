@@ -30,7 +30,7 @@ public class CarsController {
 	 * SAVE/CREATE A Car
 	 */
 	
-	@PostMapping("/register")
+	@PostMapping("/add")
 	public Car createCars(@Valid @RequestBody Car cars) {
 		cars.setBrand(cars.getBrand());
 		cars.setModel(cars.getModel());

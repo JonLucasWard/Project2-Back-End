@@ -31,7 +31,7 @@ public class RentalsController {
 	 * SAVE/CREATE A USER
 	 */
 	
-	@PostMapping("/register")
+	@PostMapping("/add")
 	public Rentals createrentals(@Valid @RequestBody Rentals rentals) {
 		rentals.setTransactionid(rentals.getTransactionid());
 		rentals.setUserid(rentals.getUserid());
