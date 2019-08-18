@@ -1,5 +1,0 @@
-package com.revature.carrental.dao;
-
-public class JwtUserDetailsService {
-
-}
