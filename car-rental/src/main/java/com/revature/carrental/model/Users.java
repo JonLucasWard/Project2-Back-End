@@ -13,10 +13,12 @@ import javax.persistence.Table;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.web.bind.annotation.CrossOrigin;
 
 @Entity
 @Table(name="users")
 @EntityListeners(AuditingEntityListener.class)
+@CrossOrigin
 public class Users {
 	
 	@Id

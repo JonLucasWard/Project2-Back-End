@@ -1,5 +1,3 @@
 INDEX VERSION 1.131
-C:\Users\Dionel\Documents\Car_Rental2\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\3129095337.index
-\car-rental\src\main\resources
-C:\Users\Dionel\Documents\Car_Rental2\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\1036414024.index
-\carrental\src\main\resources
+C:\Users\Dionel\Desktop\Project2-Back\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\3129095337.index
+\car-rental\src\main\java
