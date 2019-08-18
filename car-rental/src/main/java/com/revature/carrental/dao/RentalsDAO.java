@@ -17,9 +17,10 @@ import org.springframework.data.jpa.domain.Specification;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.CrossOrigin;
 
 import com.revature.carrental.repository.RentalsRepository;
-
+@CrossOrigin
 @Service
 public class RentalsDAO  {
 	

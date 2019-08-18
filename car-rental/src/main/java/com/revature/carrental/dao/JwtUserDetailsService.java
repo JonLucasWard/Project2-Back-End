@@ -9,10 +9,11 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.CrossOrigin;
 
 import com.revature.carrental.model.Users;
 import com.revature.carrental.repository.UsersRepository;
-
+@CrossOrigin
 @Service
 public class JwtUserDetailsService implements UserDetailsService {
 	

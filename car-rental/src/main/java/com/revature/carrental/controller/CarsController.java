@@ -7,6 +7,7 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -19,7 +20,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import com.revature.carrental.dao.CarsDAO;
 import com.revature.carrental.model.Car;
 
-
+@CrossOrigin
 @RestController
 @RequestMapping("/teame/cars")
 public class CarsController {
@@ -63,7 +64,7 @@ public class CarsController {
 	 *  GET USER BY QUERY
 	 */
 	
-	@GetMapping("/users/query")
+	@GetMapping("/query")
 	public List<Car> getUsersByQuery(@RequestBody Car cars, Integer x, Integer y, Integer z){
 		if (x == null) {
 			x = 0;

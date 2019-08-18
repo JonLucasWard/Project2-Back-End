@@ -12,7 +12,8 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
-
+import org.springframework.web.bind.annotation.CrossOrigin;
+@CrossOrigin
 @Entity
 @Table(name="cars")
 @EntityListeners(AuditingEntityListener.class)
