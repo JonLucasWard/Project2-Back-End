@@ -87,7 +87,7 @@ public class RentalsController {
 	 *  GET RENTAL BY QUERY
 	 */
 	
-	@GetMapping("/users/query")
+	@GetMapping("/query")
 	public List<Rentals> getUsersByQuery(@RequestBody Rentals rentals, Integer x, Integer y, Integer z){
 		if (x == null) {
 			x = 0;
@@ -118,9 +118,9 @@ public class RentalsController {
 	 */
 	
 	@PutMapping("/{id}")
-	public ResponseEntity<Rentals> updaterentals(@PathVariable(value="id") Long userid, @Valid @RequestBody Rentals rentalsDetails){
+	public ResponseEntity<Rentals> updaterentals(@PathVariable(value="id") Long transactionid, @Valid @RequestBody Rentals rentalsDetails){
 		
-		Rentals rentals = rentalsDAO.findOne(userid);
+		Rentals rentals = rentalsDAO.findOne(transactionid);
 		if(rentals == null) {
 			return ResponseEntity.notFound().build();
 		}

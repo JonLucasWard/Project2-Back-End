@@ -65,7 +65,7 @@ public class CarsController {
 	 *  GET USER BY QUERY
 	 */
 	
-	@GetMapping("/users/query")
+	@GetMapping("/query")
 	public List<Car> getUsersByQuery(@RequestBody Car cars, Integer x, Integer y, Integer z){
 		if (x == null) {
 			x = 0;
@@ -78,9 +78,9 @@ public class CarsController {
 	 */
 	
 	@GetMapping("/{id}")
-	public ResponseEntity<Car> getcarsById(@PathVariable(value="id") Long carid){
+	public ResponseEntity<Car> getcarsById(@PathVariable(value="id") Long billingid){
 		
-		Car cars = carsDAO.findOne(carid);
+		Car cars = carsDAO.findOne(billingid);
 		
 		if(cars == null) {
 			return ResponseEntity.notFound().build();
@@ -96,9 +96,9 @@ public class CarsController {
 	 */
 	
 	@PutMapping("/{id}")
-	public ResponseEntity<Car> updatecars(@PathVariable(value="id") Long userid, @Valid @RequestBody Car carsDetails){
+	public ResponseEntity<Car> updatecars(@PathVariable(value="id") Long carid, @Valid @RequestBody Car carsDetails){
 		
-		Car cars = carsDAO.findOne(userid);
+		Car cars = carsDAO.findOne(carid);
 		if(cars == null) {
 			return ResponseEntity.notFound().build();
 		}
@@ -126,9 +126,9 @@ public class CarsController {
 	 */
 	
 	@DeleteMapping("/{id}")
-	public ResponseEntity<Car> deletecars(@PathVariable(value="id") Long carid){
+	public ResponseEntity<Car> deletecars(@PathVariable(value="id") Long billingid){
 		
-		Car cars = carsDAO.findOne(carid);
+		Car cars = carsDAO.findOne(billingid);
 		
 		if(cars == null) {
 			return ResponseEntity.notFound().build();

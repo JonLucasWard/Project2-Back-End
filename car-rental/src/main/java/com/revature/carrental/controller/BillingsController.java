@@ -61,7 +61,7 @@ public class BillingsController {
 	 *  GET USER BY QUERY
 	 */
 	
-	@GetMapping("/users/query")
+	@GetMapping("/query")
 	public List<Billings> getUsersByQuery(@RequestBody Billings bills, Integer x, Integer y){
 		if (x == null) {
 			x = 0;

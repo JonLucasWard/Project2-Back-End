@@ -24,8 +24,8 @@ import com.revature.carrental.model.Users;
 
 
 @RestController
+@CrossOrigin(origins = "http://localhost:3000")
 @RequestMapping("/teame")
-@CrossOrigin
 public class UsersController {
 
 	@Autowired
@@ -35,6 +35,7 @@ public class UsersController {
 	 * SAVE/CREATE A USER
 	 */
 	
+	@CrossOrigin(origins = "http://localhost:3000")
 	@PostMapping("/register")
 	public Users createUsers(@Valid @RequestBody Users users) {
 		users.setUsername(users.getUsername());
@@ -52,7 +53,7 @@ public class UsersController {
 	/*
 	 * GET ALL USERS
 	 */
-	
+	@CrossOrigin(origins = "http://localhost:3000")
 	@GetMapping("/users")
 	public List<Users> getAllUsers(){
 		return usersDAO.findAll();
@@ -61,7 +62,7 @@ public class UsersController {
 	/*
 	 * GET USER BY ID
 	 */
-	
+	@CrossOrigin(origins = "http://localhost:3000")
 	@GetMapping("/users/{id}")
 	public ResponseEntity<Users> getUsersById(@PathVariable(value="id") Long userid){
 		Users users = usersDAO.findOne(userid);
@@ -75,6 +76,7 @@ public class UsersController {
 	 *  GET USER BY QUERY
 	 */
 	
+	@CrossOrigin(origins = "http://localhost:3000")
 	@GetMapping("/users/query")
 	public List<Users> getUsersByQuery(@RequestBody Users users, Integer x){
 		if (x == null) {
@@ -86,7 +88,7 @@ public class UsersController {
 	/*
 	 * UPDATE USERS
 	 */
-	
+	@CrossOrigin(origins = "http://localhost:3000")
 	@PutMapping("/users/{id}")
 	public ResponseEntity<Users> updateUsers(@PathVariable(value="id") Long userid, @Valid @RequestBody Users usersDetails){
 		
@@ -113,7 +115,7 @@ public class UsersController {
 	/*
 	 * DELETE USERS
 	 */
-	
+	@CrossOrigin(origins = "http://localhost:3000")
 	@DeleteMapping("/users/{id}")
 	public ResponseEntity<Users> deleteUsers(@PathVariable(value="id") Long userid){
 		

@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 @Entity
 @Table(name="users")
 @EntityListeners(AuditingEntityListener.class)
-@CrossOrigin
+@CrossOrigin(origins = "http://localhost:3000")
 public class Users {
 	
 	@Id
