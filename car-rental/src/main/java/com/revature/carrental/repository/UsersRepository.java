@@ -15,6 +15,5 @@ public interface UsersRepository extends JpaRepository<Users, Long>, JpaSpecific
 
 	Users findOneByUsername(String Username);
 	List<Users> findAll();
-	List<Users> findAllByOrderByemailAsc();
 	
 }
